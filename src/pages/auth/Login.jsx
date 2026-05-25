@@ -1,8 +1,48 @@
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
 
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [error, setError] = useState("");
+
+const handleLogin = (e) => {
+  e.preventDefault();
+
+  if (!email && !password) {
+    setError("Please enter your email address and password.");
+    return;
+  }
+
+  if (!email) {
+    setError("Email address is required.");
+    return;
+  }
+
+  if (!password) {
+    setError("Password is required.");
+    return;
+  }
+
+  if (email !== "admin@hrms.com") {
+    setError(
+      "We could not find an account with this email address."
+    );
+    return;
+  }
+
+  if (password !== "admin123") {
+    setError(
+      "The password you entered is incorrect. Please try again."
+    );
+    return;
+  }
+
+  setError("");
+  navigate("/dashboard");
+};
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
@@ -25,7 +65,7 @@ export default function Login() {
 
         </div>
 
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleLogin}>
 
           <div>
             <label
@@ -40,6 +80,8 @@ export default function Login() {
               type="text"
               placeholder="Enter your email or phone number"
               className="w-full rounded-2xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
+              value={email}
+onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -56,6 +98,8 @@ export default function Login() {
               type="password"
               placeholder="Enter your password"
               className="w-full rounded-2xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
+              value={password}
+onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
@@ -78,14 +122,21 @@ export default function Login() {
 </div>
 
           </div>
-
+ {error && (
+    <div
+      role="alert"
+      aria-live="assertive"
+      className="bg-red-100 text-red-700 px-4 py-3 rounded-xl text-sm"
+    >
+      {error}
+    </div>
+  )}
           <button
-            type="button"
-            onClick={() => navigate("/dashboard")}
-            className="w-full bg-black text-white py-3 rounded-2xl font-semibold hover:opacity-90"
-          >
-            Sign In
-          </button>
+  type="submit"
+  className="w-full bg-black text-white py-3 rounded-2xl font-semibold hover:opacity-90"
+>
+  Sign In
+</button>
 
         </form>
 
