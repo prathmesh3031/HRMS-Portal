@@ -5,44 +5,56 @@ export default function Login() {
 
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const [error, setError] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-const handleLogin = (e) => {
-  e.preventDefault();
+  const handleLogin = (e) => {
+    e.preventDefault();
 
-  if (!email && !password) {
-    setError("Please enter your email address and password.");
-    return;
-  }
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
 
-  if (!email) {
-    setError("Email address is required.");
-    return;
-  }
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  if (!password) {
-    setError("Password is required.");
-    return;
-  }
+    if (!trimmedEmail && !trimmedPassword) {
+      setError("Please enter your email address and password.");
+      return;
+    }
 
-  if (email !== "admin@hrms.com") {
-    setError(
-      "We could not find an account with this email address."
-    );
-    return;
-  }
+    if (!trimmedEmail) {
+      setError("Please enter your email address.");
+      return;
+    }
 
-  if (password !== "admin123") {
-    setError(
-      "The password you entered is incorrect. Please try again."
-    );
-    return;
-  }
+    if (!emailPattern.test(trimmedEmail)) {
+      setError(
+        "Invalid email address. Use a valid format like example@example.com."
+      );
+      return;
+    }
 
-  setError("");
-  navigate("/dashboard");
-};
+    if (!trimmedPassword) {
+      setError("Please enter your password.");
+      return;
+    }
+
+    if (trimmedEmail !== "admin@hrms.com") {
+      setError(
+        "No account found with this email address."
+      );
+      return;
+    }
+
+    if (trimmedPassword !== "admin123") {
+      setError(
+        "Incorrect password. Please try again."
+      );
+      return;
+    }
+
+    setError("");
+    navigate("/dashboard");
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
@@ -81,7 +93,7 @@ const handleLogin = (e) => {
               placeholder="Enter your email or phone number"
               className="w-full rounded-2xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
               value={email}
-onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -99,7 +111,7 @@ onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your password"
               className="w-full rounded-2xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
               value={password}
-onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
@@ -110,33 +122,33 @@ onChange={(e) => setPassword(e.target.value)}
               Remember me
             </label>
 
-           <div className="text-right">
+            <div className="text-right">
 
-  <Link
-    to="/forgot-password"
-    className="text-blue-600 hover:underline text-sm"
-  >
-    Forgot Password?
-  </Link>
+              <Link
+                to="/forgot-password"
+                className="text-blue-600 hover:underline text-sm"
+              >
+                Forgot Password?
+              </Link>
 
-</div>
+            </div>
 
           </div>
- {error && (
-    <div
-      role="alert"
-      aria-live="assertive"
-      className="bg-red-100 text-red-700 px-4 py-3 rounded-xl text-sm"
-    >
-      {error}
-    </div>
-  )}
+          {error && (
+            <div
+              role="alert"
+              aria-live="assertive"
+              className="bg-red-100 text-red-700 px-4 py-3 rounded-xl text-sm"
+            >
+              {error}
+            </div>
+          )}
           <button
-  type="submit"
-  className="w-full bg-black text-white py-3 rounded-2xl font-semibold hover:opacity-90"
->
-  Sign In
-</button>
+            type="submit"
+            className="w-full bg-black text-white py-3 rounded-2xl font-semibold hover:opacity-90"
+          >
+            Sign In
+          </button>
 
         </form>
 
