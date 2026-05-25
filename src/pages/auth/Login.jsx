@@ -66,12 +66,16 @@ export default function Login() {
               Remember me
             </label>
 
-            <button
-              type="button"
-              className="text-sm underline"
-            >
-              Forgot Password?
-            </button>
+           <div className="text-right">
+
+  <Link
+    to="/forgot-password"
+    className="text-blue-600 hover:underline text-sm"
+  >
+    Forgot Password?
+  </Link>
+
+</div>
 
           </div>
 

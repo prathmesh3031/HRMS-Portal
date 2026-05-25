@@ -11,9 +11,9 @@ export default function MainLayout({ children }) {
                 aria-label="Sidebar Navigation"
             >
 
-                <h1 className="text-2xl font-bold mb-10">
+                <h2 className="text-2xl font-bold mb-10">
                     HRMS
-                </h1>
+                </h2>
 
                 <nav>
                     <ul className="space-y-4">

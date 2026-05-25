@@ -7,9 +7,9 @@ export default function Navbar() {
       {/* Left Section */}
       <div>
 
-        <h1 className="text-2xl font-bold">
+        <p className="text-2xl font-bold">
           Welcome Back 👋
-        </h1>
+        </p>
 
         <p className="text-gray-600 mt-1">
           Manage your HR activities efficiently

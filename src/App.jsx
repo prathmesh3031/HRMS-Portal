@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Login from "./pages/auth/Login";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Attendance from "./pages/attendance/Attendance";
 import Leave from "./pages/leave/Leave";
@@ -21,6 +22,11 @@ function App() {
           path="/dashboard"
           element={<Dashboard />}
         />
+
+<Route
+  path="/forgot-password"
+  element={<ForgotPassword />}
+/>
 
         <Route
   path="/attendance"
